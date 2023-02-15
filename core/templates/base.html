@@ -8,14 +8,36 @@
     <title>{%block mytitle%} home {%endblock%} Djangochat</title>
 
     <style>
+        nav, nav div {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    background: red;
+    padding: 5px 0;
+    
+}
+nav {
+    justify-content: space-between;
+}
+
+nav div a {
+    padding: 0 10px;
+}
         a{
             align-items: flex-end;
             text-decoration: none;
+            font-size: 18px;
+            color: white;
+            padding: 5px 0;
+            font-family: sans-serif;
 
         }
 
         div{
             align-items: center;
+        }
+        #status {
+            color:whitesmoke;
         }
         
             
@@ -31,6 +53,13 @@
     </div>
     <div>
         {% if user.id %}
+        <span id="status">logged in as {{user.first_name}}</span><br><br><br>
+        {%else%}
+        <span id="status">please log in or sign up</span>
+        {% endif%}
+    </div>
+    <div>
+        {% if user.id %}
         <div>
             <a href="{% url 'signout' %}">log out</a>
            </div>
@@ -42,11 +71,7 @@
        </div>
        {% endif %}
 
-       {% if user.id %}
-<span>logged in as {{user.first_name}}</span><br><br><br>
-{%else%}
-<span>please log in or sign up</span>
-{% endif%}
+
        
     </div>
     </nav>

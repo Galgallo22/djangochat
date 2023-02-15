@@ -28,6 +28,9 @@ Welcome
         width: 40%;
         margin: 10px 0;
         position: relative;
+        font-size: 18px;
+        font-family: sans-serif;
+        
     }
     .received {
         align-self: start;
@@ -37,6 +40,8 @@ Welcome
         width: 40%;
         margin: 10px 0;
         position: relative;
+        font-size: 18px;
+        font-family: sans-serif;
     }
     .time{
         position: absolute;
@@ -53,12 +58,32 @@ Welcome
         /* align-items: center; */
     }
     textarea {
-        width: 70%;
-        height: 20px;
+        width: 50%;
+        height: 90px;
+        border-radius: 12px;
         resize:none;
+        padding: 10px;
     }
     form {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center ;
+    }
+
+    select{
+        width:50%;
+
+    }
+    input[type=submit]{
+        width: 50%;
+        padding: 5px 15px ;
+        text-transform: uppercase;
+        border: none;
+        background-color: orange;
+        font-size: 18px;
+        color: white;
+        border-radius: 15px;
     }
 </style>
 {% endblock %}

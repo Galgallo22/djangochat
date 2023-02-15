@@ -8,7 +8,10 @@ from django.contrib.auth.hashers import make_password
 def frontpage(request):
     # message =Message.objects.get(author_id=2)
     # message.delete()
-    return render(request,'frontpage.html')
+    if request.user.is_authenticated:
+        return redirect('/viewer',request.path)
+    else:
+        return render(request,'frontpage.html')
 
 def signup(request):
     if request.method=='POST':
@@ -25,7 +28,7 @@ def signup(request):
 
 def signin(request):
     if request.user.is_authenticated:
-        return redirect('/',request.path)
+        return redirect('/viewer',request.path)
     else:
         if request.method=='POST':
             username=request.POST['email']
