@@ -1,0 +1,67 @@
+{%extends 'base.html' %}
+{%load static%}
+
+{%block mytitle%}
+Welcome
+{%endblock%}
+
+{%block style%}
+<style>
+    .container{
+        width: 70%;
+        /* background-color: brown; */
+        display: flex;
+        flex-direction: column;
+        margin:auto;
+    }
+    .sent {
+        align-self: end;
+        padding: 20px;
+        background-color: chartreuse;
+        border-radius: 10px;
+        width: 40%;
+        margin: 10px 0;
+        position: relative;
+    }
+    .received {
+        align-self: start;
+        padding: 20px;
+        background-color: crimson;
+        border-radius: 10px;
+        width: 40%;
+        margin: 10px 0;
+        position: relative;
+    }
+    .time{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 12px;
+        padding:2px 5px;
+    }
+    #sendmessage {
+        margin: auto;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
+{%block content%}
+
+<h1>{{user}}</h1>
+
+<div  id="sendmessage">
+
+            {% for target in users%}
+            {% if target.username != user.username %}
+            <!-- <option value="{{target.username}}">{{target.username}}</option> -->
+            <a href="{% url 'viewer/5' %}">{{target.username}}</a>
+            {% endif %}
+            {% endfor %}
+
+
+</div>
+
+{%endblock%}

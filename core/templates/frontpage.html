@@ -1,0 +1,17 @@
+{%extends 'base.html' %}
+{%load static%}
+
+{%block mytitle%}
+Welcome
+{%endblock%}
+
+{%block content%}
+
+<h1>Djangochat</h1>
+{% if user.id %}
+<h1>logged in as {{user.first_name}}</h1>
+{%else%}
+<h1>please log in or sign up</h1>
+{% endif%}
+
+{%endblock%}

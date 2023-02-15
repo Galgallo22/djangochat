@@ -1,0 +1,20 @@
+{%extends 'base.html' %}
+{%load static%}
+
+{%block mytitle%}
+Rooms
+{%endblock%}
+
+{%block content%}
+<div class="div">
+  <h1>Rooms</h1>
+</div>
+<div>
+    {%for rooms in room%}
+    <div class="div">
+      <h2>Room1</h2>
+    </div>
+</div>
+
+<h2>{{%room.name%}}</h2>
+{%endblock%}

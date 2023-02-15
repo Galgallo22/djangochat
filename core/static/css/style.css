@@ -1,0 +1,16 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav, nav div {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    background: red;
+}
+
+nav div a {
+    padding: 0 10px;
+}

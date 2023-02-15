@@ -1,0 +1,35 @@
+{%extends 'base.html' %}
+
+{%load static%}
+
+{%block mytitle%}
+Welcome
+{%endblock%}
+
+{%block style%}
+<style>
+    form{
+        margin: 10px auto;
+        width:80% ;
+    }
+    input{
+        margin: 6px;
+        padding: 6px;
+        width: 50%;
+
+    }
+    
+</style>
+
+{% endblock %}
+
+{%block content%}
+<label for="">Log in</label>
+    <form action="" method="post">
+        {% csrf_token %}
+    
+        <input type="email" name="email" id="" placeholder="enter email">
+        <input type="password" name="password" id="" placeholder="enter password">
+        <input type="submit" value="log in">
+    </form>
+    {% endblock %}

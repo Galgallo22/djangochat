@@ -1,0 +1,41 @@
+{%extends 'base.html' %}
+
+{%load static%}
+
+{%block mytitle%}
+Welcome
+{%endblock%}
+
+{%block style%}
+<style>
+    form{
+        margin:10px auto;
+        width:50%;   
+    }
+    input{
+        margin:10px;
+        width:100%;
+        padding: 10px;
+}
+    label{
+         text-decoration: solid;
+
+   }
+</style>
+{% endblock %}
+
+{%block content%}
+   <label for="signup">Sign Up</label>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <input type="text" name="first_name" id="" placeholder="enter first name"><br>
+        <input type="text" name="last_name" id="" placeholder="enter last name"><br>
+        <input type="email" name="email" id="" placeholder="enter email"><br>
+        <input type="password" name="password" id="" placeholder="enter password"><br>
+        <input type="submit" value="Sign Up">
+    </form>
+    {%endblock%}   
+<!-- </body>
+</html> -->

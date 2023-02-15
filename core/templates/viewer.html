@@ -1,0 +1,122 @@
+{%extends 'base.html' %}
+{%load static%}
+
+{%block mytitle%}
+Welcome
+{%endblock%}
+
+{%block style%}
+<style>
+    .container{
+        width: 70%;
+
+        /* background-color: brown; */
+        display: flex;
+        flex-direction: column;
+        margin:auto;
+        margin-top: 18px;
+        height: 400px;
+        overflow-y: auto;
+        align-items: center;
+        /* justify-content: center; */
+    }
+    .sent {
+        align-self: end;
+        padding: 20px;
+        background-color: chartreuse;
+        border-radius: 10px;
+        width: 40%;
+        margin: 10px 0;
+        position: relative;
+    }
+    .received {
+        align-self: start;
+        padding: 20px;
+        background-color: crimson;
+        border-radius: 10px;
+        width: 40%;
+        margin: 10px 0;
+        position: relative;
+    }
+    .time{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 12px;
+        padding:2px 5px;
+    }
+    #sendmessage {
+        margin: auto;
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+    }
+    textarea {
+        width: 70%;
+        height: 20px;
+        resize:none;
+    }
+    form {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{%block content%}
+
+<div class="container">
+{% for message in messages.values %}
+<!-- <span>{{message}}</span> -->
+{% if message.author_id == user.id %}
+<div class="sent">
+    {{message.body}}
+    <div class="time">
+        {{message.timestamp}}
+    </div>
+</div>
+{%else%}
+<div class="received">
+    {{message.body}}
+    <div class="time">
+        {{message.timestamp}}
+    </div>
+</div>
+{% endif %}
+{% empty %}
+<div class="nodata">
+    no chat yet
+</div>
+{% endfor %}
+        
+    
+</div>
+<div  id="sendmessage">
+    <form action="" method="post">
+        {% csrf_token %}
+        <select name="target" id="myselect">
+            <option value="{{active_target}}">{{active_target}}</option>
+            {% for target in users%}
+            {% if target.username != user.username and target.username != active_target.username %}
+            <option value="{{target.username}}">{{target.username}}</option>
+            {% endif %}
+            {% endfor %}
+        </select><br>
+        <textarea name="body" id="" cols="30" rows="10" placeholder="enter message"></textarea><br>
+        <input type="text" name="author" id="" value="{{user.username}}" hidden>
+        <input type="submit" value="send">
+    </form>
+
+    <script defer>
+        document.getElementById("myselect").onchange= function(event) {
+            let selected = this.selectedIndex
+            selected =this.children[selected].value;
+            document.body.innerHTML += `<form id="dynForm" action="" method="post">{% csrf_token %}<input type="hidden" name="target" value="${selected}"></form>`;
+document.getElementById("dynForm").submit();
+            // location.reload();
+        }
+    </script>
+
+</div>
+
+{%endblock%}
