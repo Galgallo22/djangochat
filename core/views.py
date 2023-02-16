@@ -6,12 +6,23 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 
 def frontpage(request):
-    # message =Message.objects.get(author_id=2)
-    # message.delete()
     if request.user.is_authenticated:
         return redirect('/viewer',request.path)
     else:
-        return render(request,'frontpage.html')
+        if request.method=='POST':
+            username=request.POST['email']
+            password=request.POST['password']
+        
+            user =authenticate(username=username,password=password)
+            print(user)
+            if user is not None:
+            
+                login(request, user)
+                return redirect('/',request.path)
+            else:
+                print('n')
+
+    return render(request,'login.html')
 
 def signup(request):
     if request.method=='POST':
@@ -23,6 +34,7 @@ def signup(request):
             user=User(first_name=first_name,last_name=last_name,username=username,password=password)
 
             user.save()
+            return redirect('/signin',request.path)
     
     return render(request,'signup.html')
 
